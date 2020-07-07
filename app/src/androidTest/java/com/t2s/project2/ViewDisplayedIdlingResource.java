@@ -14,10 +14,11 @@ public class ViewDisplayedIdlingResource implements IdlingResource { // (Mike) -
 
     private ResourceCallback mResourceCallback;
     //  TODO: MAKE A CLASS VARIABLE HERE FOR TEXTVIEW
-
+    private TextView mTextView;
 
     public ViewDisplayedIdlingResource(TextView textView) {
         //TODO: CONVERT 'textView' INTO A CLASS VARIABLE
+        mTextView = textView;
     }
 
     // (Mike) - This can be anything
@@ -33,12 +34,14 @@ public class ViewDisplayedIdlingResource implements IdlingResource { // (Mike) -
 
         // TODO: RETURN TRUE WHEN THE TEXTVIEW (WHICH WAS PASSED IN THROUGH THE CONSTRUCTOR) FINALLY SAYS HELLO WORLD, OTHERWISE RETURN FALSE
 
-        // TODO: FIX THIS BELOW
-        if (true) {
-            mResourceCallback.onTransitionToIdle();
-        }
+        String text =  mTextView.getText().toString();
 
-        return false;
+        if (text.equals("Hello world")) {
+            mResourceCallback.onTransitionToIdle();
+            return true;
+        }
+        else
+            return false;
     }
 
     @Override

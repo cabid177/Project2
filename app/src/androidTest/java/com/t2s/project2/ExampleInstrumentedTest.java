@@ -29,6 +29,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
+
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(MainActivity.class);
 
@@ -70,9 +71,7 @@ public class ExampleInstrumentedTest {
         //6.	This will be tricky, but verify that the TextView displays “Hello World”
 
 
-        // TODO: Find a way to grab the TextView.  The Class Variable above (mActivityRule) can help you get the TextView;
-        // TODO: REPLACE THIS BELOW
-        TextView textView = new TextView(mActivityRule.getActivity()); // REPLACE
+        TextView textView = mActivityRule.getActivity().findViewById(R.id.tenSec);
 
         // (Mike) - Need to create an object that holds the IdlingResource
         // (Mike) - ElapsedIdlingResource is a custom class that we create
@@ -85,7 +84,7 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.tenSec)).check(matches(withText("Hello world")));
 
         // (Mike) - Unregister this idling resource
-        IdlingRegistry.getInstance().register(idlingResource);
+        IdlingRegistry.getInstance().unregister(idlingResource);
 
 
     }
